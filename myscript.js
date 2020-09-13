@@ -19,7 +19,7 @@ function startGame()
     YouWon = new component("140px", "Arial","green","green", 50, 260, "text");
      mylevel = new component("25px", "Consolas", "black","black", 870, 130, "text");
      head = new component("32px", "Consolas", "red","red", 864, 35, "text");
-     birds = new component(85,10,"darkblue","darkblue",0,0,"text");
+     area = new component(85,10,"darkblue","darkblue",0,0,"text");
      rec= new component(3,480,"darkblue","darkblue",856,0,"fig");
      rules2 = new component(865,200,);
     myGameArea.start();
@@ -125,7 +125,7 @@ function component(width, height, source1,source2, x, y,type)
     }
     
 }
-var temp=0,score=0,time=0,num=1,level=1,t,tempt=0,tempt2=0,tempt3=0,monspeed=-1,flag=-1;
+var temp=0,score=0,time=0,num=1,level=1,t,tempt=0,tempt2=0,tempt3=0,b=-1,flag=-1;
 //call update game area after every 20 ms
 function updateGameArea() 
 {
@@ -136,7 +136,7 @@ function updateGameArea()
     if (myGameArea.key == 37) {myGamePiece.direction = "L"; }
     if (myGameArea.key == 39) {myGamePiece.direction = "R"; }
     if (myGameArea.key == 32) {
-    	if((time>=(tempt3+10)) || (num==1))
+    	if((time>=(tempt3+5)) || (num==1))
     	   {
 
     	ax=myGamePiece.x;
@@ -160,7 +160,7 @@ function updateGameArea()
 
         tempt3=time;
     }
-    if (myGameArea.key == 38) {
+    if (myGameArea.key == 38) {//up
     	if(myGamePiece.y<=-335)
     	{
     		myGamePiece.speedY=0;
@@ -187,7 +187,7 @@ function updateGameArea()
     }
     if(time==2250)
     {
-    	monspeed+= -1;
+    	b+= -1;
     	level++;
     	time=0;
     }
@@ -219,13 +219,13 @@ function updateGameArea()
     for (i = 0; i < myObstacles.length; i += 1) {
     	if(temp>25){
         	myObstacles[i].direction='R';
-        	birds.direction='R';
+        	
         }
         else{
         	myObstacles[i].direction='L';
-        	birds.direction='L';
+        	
         }
-        myObstacles[i].y += monspeed;
+        myObstacles[i].y += b;
         myObstacles[i].update();
     }
     if(time==tempt+10)
@@ -237,7 +237,7 @@ function updateGameArea()
     myGamePiece.s2="images/shooterr.png";	
     }
     for(i = 0; i < myObstacles.length;i +=1){
-        if (myObstacles[i].crashWith(birds)) {
+        if (myObstacles[i].crashWith(area)) {
         	//snd3.play();
             myObstacles[i].y=-100;
         	if(myObstacles[i].s1=="images/splash.png")
@@ -325,7 +325,7 @@ function updateGameArea()
     	myGameArea.stop();
 
     }
-    if(level==5)
+    if(level==3)
     {
     	YouWon.update();
     	myGameArea.stop();
