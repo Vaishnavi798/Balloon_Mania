@@ -1,4 +1,3 @@
-//declaring obstacles
 var myGamePiece;
 var myObstacles = [];
 var myScore;
@@ -10,7 +9,6 @@ var arrowl=[];
 var arrowr=[];
 var snd1= new Audio("sounds/smb_kick.wav");
 var snd2= new Audio("sounds/smb_stomp.wav");
-var snd3= new Audio("sounds/bird.wav");
 
 function startGame()
  {
@@ -21,7 +19,7 @@ function startGame()
     YouWon = new component("140px", "Arial","green","green", 50, 260, "text");
      mylevel = new component("25px", "Consolas", "black","black", 870, 130, "text");
      head = new component("32px", "Consolas", "red","red", 864, 35, "text");
-     birds = new component(85,10,"images/birds.png","images/birds2.png",0,0,"image");
+     birds = new component(85,10,"darkblue","darkblue",0,0,"text");
      rec= new component(3,480,"darkblue","darkblue",856,0,"fig");
      rules2 = new component(865,200,);
     myGameArea.start();
@@ -240,7 +238,7 @@ function updateGameArea()
     }
     for(i = 0; i < myObstacles.length;i +=1){
         if (myObstacles[i].crashWith(birds)) {
-        	snd3.play();
+        	//snd3.play();
             myObstacles[i].y=-100;
         	if(myObstacles[i].s1=="images/splash.png")
         	{}
@@ -318,10 +316,9 @@ function updateGameArea()
     mylevel.update();
     myGamePiece.newPos();    
     myGamePiece.update();
-    birds.update();
     rec.update();
     head.update();
-    //rules.update();
+    
     if(score<0)
     {
     	GameOver.update();
